@@ -36,16 +36,16 @@
         <td><%= player.name %></td>
         <% end %>
       </tr>
-      <tr>
+      <!-- <tr>
         <td>Inning 1</td>
         <% @players.each do |player| %>
           <td><%= @position[player.pref_pos - 1] %></td>
         <% end %>
-      </tr>
+      </tr> -->
       <!-- working on preventing avoid_pos to be allowed -->
-      <% 5.times do |x| %>
+      <% 6.times do |x| %>
       <tr>
-        <td>Inning <%= x + 2 %></td>
+        <td>Inning <%= x + 1 %></td>
           <% @position.shuffle.take(@players.length).each do |p| %>
             <td><%=p%></td>
           <% end %>
