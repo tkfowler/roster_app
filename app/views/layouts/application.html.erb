@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Roster</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <% if flash[:errors] %>
+    <ul>
+      <% flash[:errors].each do |e| %>
+        <p><%= e %></p>
+      <% end %>
+    </ul>
+    <% end %>
+    <div class="container">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+            <ul class="nav navbar-nav navbar-right" id="login">
+              <li style="display: inline-block">Sign In</li>
+              <li style="display: inline-block">Login</li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+    <%= yield %>
+  </body>
+</html>

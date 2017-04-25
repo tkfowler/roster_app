@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Roster</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="players-create">
+        <h1>Build Your Roster</h1>
+        <form action="/roster" method="post" class='form-inline'>
+          <!-- <div class="form">
+            <div class="players"> -->
+              <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+              <input type="text" name="player[name]" placeholder="Player Name">
+              <select name="player[pitcher]">
+                <option selected="true" disabled="disabled">Pitcher?</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+              <select name="player[inning_pitch]">
+                <option selected='true' disabled="disabled">Inning Pitching</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+              <select name="player[pref_pos]">
+                <option selected="true" disabled="disabled">Preferred Position(s)</option>
+                <option value="1">Pitcher (1)</option>
+                <option value="2">Catcher (2)</option>
+                <option value="3">First Base (3)</option>
+                <option value="4">Second Base (4)</option>
+                <option value="5">Third Base (5)</option>
+                <option value="6">Short Stop (6)</option>
+                <option value="7">Left Field (7)</option>
+                <option value="8">Center Field (8)</option>
+                <option value="9">Right Field (9)</option>
+              </select>
+              <select name="player[avoid_pos]">
+                <option selected="true" disabled="disabled">Positions to Avoid</option>
+                <option value="1">Pitcher (1)</option>
+                <option value="2">Catcher (2)</option>
+                <option value="3">First Base (3)</option>
+                <option value="4">Second Base (4)</option>
+                <option value="5">Third Base (5)</option>
+                <option value="6">Short Stop (6)</option>
+                <option value="7">Left Field (7)</option>
+                <option value="8">Center Field (8)</option>
+                <option value="9">Right Field (9)</option>
+              </select>
+            <!-- </div>
+          </div> -->
+          <!-- <button type="button" id="add">Add a Player</button> -->
+          <input type="submit" value="Add Player">
+        </form>
+        <table class="table table-bordered">
+          <tr>
+            <th>Player Name</th>
+            <th>Pitcher?</th>
+            <th>Inning Pitching</th>
+            <th>Preferred Position</th>
+            <th>Position to Avoid</th>
+          </tr>
+          <% @players.each do |player|%>
+          <tr>
+            <td><%=player.name%></td>
+            <td>
+              <% if player.pitcher == true %>
+              Yes
+              <% else %>
+              No
+              <% end %>
+            </td>
+            <td><%=player.inning_pitch%></td>
+            <td><%=@position.find(player.pref_pos).name%></td>
+            <td><%=@position.find(player.avoid_pos).name%></td>
+            <td><a href='/roster/<%=player.id%>' data-method='delete'>X</a></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="min-rules">
+        <h1>Minimum Play Rules</h1>
+        <div class="btn-group btn-toggle">
+            	<button class="btn btn-xs btn-default">ON</button>
+            	<button class="btn btn-xs btn-success active">OFF</button>
+      	</div>
+        <ul>
+          <li><span class="rules">Rule 1: Players must play a minimum of 2 innings in the infield and 1 inning in the outfield for games lasting 4+ innings.</span></li>
+          <li><span class="rules">Rule 2: Players cannot play in the same position more than two times in a game.</span></li>
+        </ul>
+      </div>
+      <div class=".col-xs-6 .col-sm-3" id='roster-button'>
+        <form action="/roster">
+          <input class="btn btn-default" type="submit" value="Build Your Lineup">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
